@@ -13,7 +13,7 @@ import { AuthContext } from "./context/AuthContext";
 
 
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(DarkModeContext); 
   
 const {currentUser} = useContext(AuthContext)
 
@@ -42,7 +42,7 @@ const {currentUser} = useContext(AuthContext)
               </RequireAuth>
               } />
 
-              <Route path=":userId" element={
+              <Route path="users/${id}" element={
                 <RequireAuth>
                 <Single />
               </RequireAuth>
