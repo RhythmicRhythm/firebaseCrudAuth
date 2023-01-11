@@ -14,6 +14,7 @@ import { db } from "../../firebase";
 
 const Datatable = () => {
   const [data, setData] = useState([]);
+  const [userid, setUserid] = useState([]);
 
   useEffect(() => {
      const fetchData = async () => {
@@ -32,6 +33,14 @@ const Datatable = () => {
     fetchData();
   }, []);
 
+  const handleEdit = (id) => {
+    console.log('hello');
+    console.log(id);
+    setUserid(id);
+   
+   }
+
+   
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "users", id));
@@ -49,9 +58,15 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+           
+           <Link to="/users/${userid}" style={{ textDecoration: "none" }}>
+              <div className="viewButton"
+              onClick={() => handleEdit(params.row.id)} 
+              >
+                View
+                </div>
+                </Link>
+
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}

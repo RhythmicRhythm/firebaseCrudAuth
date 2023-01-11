@@ -65,11 +65,7 @@ const New = ({ inputs, title }) => {
 
     setData({ ...data, [id]: value });
     
-
-
   };
-
-
 
  const handleAdd = async (e) => {
     e.preventDefault();
