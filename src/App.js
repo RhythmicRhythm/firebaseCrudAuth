@@ -42,7 +42,7 @@ const {currentUser} = useContext(AuthContext)
               </RequireAuth>
               } />
 
-              <Route path="users/${id}" element={
+              <Route path=":userId" element={
                 <RequireAuth>
                 <Single />
               </RequireAuth>
