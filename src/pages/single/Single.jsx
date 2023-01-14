@@ -4,11 +4,37 @@ import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 import { useParams } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import {
+  collection,
+  getDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  snapshot
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 
 const Single = () => {
+ 
+
   const { id } = useParams();
+  const [data, setData] = useState();
+
+  useEffect(() =>{
+    id && getSingleUser();
+     }, [id]);
+
+const getSingleUser = async () => {
+  const docRef = doc(db, "users", id);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()){
+    setData({...snapshot.data()});
+    console.log(data);
+  }
+
+}
   
   return (
     <div className="single">

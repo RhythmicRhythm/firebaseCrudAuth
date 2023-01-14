@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -15,6 +16,9 @@ import { db } from "../../firebase";
 const Datatable = () => {
   const [data, setData] = useState([]);
   const [userid, setUserid] = useState([]);
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
      const fetchData = async () => {
@@ -35,9 +39,8 @@ const Datatable = () => {
 
   const handleEdit = (id) => {
     console.log('hello');
-    console.log(id);
-    setUserid(id);
-   
+    console.log();
+    navigate(`/users/${id}`)
    }
 
    
@@ -58,14 +61,12 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-           
-           <Link to="/users/${userid}" style={{ textDecoration: "none" }}>
               <div className="viewButton"
               onClick={() => handleEdit(params.row.id)} 
               >
                 View
                 </div>
-                </Link>
+             
 
             <div
               className="deleteButton"
