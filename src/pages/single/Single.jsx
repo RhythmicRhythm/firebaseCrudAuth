@@ -5,6 +5,7 @@ import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import {
   collection,
   getDoc,
@@ -19,26 +20,34 @@ import { db } from "../../firebase";
 const Single = () => {
  
 
-  const { id } = useParams();
-  const [data, setData] = useState();
+  const id = useParams();
+    
+    console.log(id);
 
   useEffect(() =>{
-    id && getSingleUser();
+    id && getSingleUser(id);
      }, [id]);
 
-const getSingleUser = async () => {
-  const docRef = doc(db, "users", id);
-  const snapshot = await getDoc(docRef);
-  if (snapshot.exists()){
-    setData({...snapshot.data()});
-    console.log(data);
-  }
 
+const getSingleUser = async () => {
+  console.log(id);
+  try {
+    console.log(id);
+    const docSnap = await getDoc(doc(db, "users", id));
+    if(docSnap.exists()) {
+        console.log(docSnap.data());
+    } else {
+        console.log("Document does not exist")
+    }
+
+} catch(error) {
+    console.log(error)
+}
 }
   
   return (
     <div className="single">
-      <Sidebar />
+      <Sidebar />/
       <div className="singleContainer">
         <Navbar />
         <div className="top">
@@ -52,7 +61,7 @@ const getSingleUser = async () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">ooo</h1>
+                <h1 className="itemTitle">oooo</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
                   <span className="itemValue">janedoe@gmail.com</span>
