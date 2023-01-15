@@ -20,12 +20,14 @@ import { db } from "../../firebase";
 const Single = () => {
  
 
-  const id = useParams();
+  const params = useParams();
     
+    console.log(params.userId);
+    let id = (params.userId);
     console.log(id);
 
   useEffect(() =>{
-    id && getSingleUser(id);
+    id && getSingleUser();
      }, [id]);
 
 
@@ -43,6 +45,8 @@ const getSingleUser = async () => {
 } catch(error) {
     console.log(error)
 }
+
+
 }
   
   return (
